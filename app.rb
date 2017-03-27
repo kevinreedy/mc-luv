@@ -2,10 +2,16 @@ require './lib/time_math'
 require 'sinatra'
 require 'flyday'
 
-# TODO: show Wifi
-# TODO: show # of segments on direct flights
-# TODO: css fomatting
 # TODO: add search info to results page
+
+# Add new method to Flyday::Flight class for icons for Wi-Fi and stops
+Flyday::Flight.send(:define_method, 'flight_number_with_icons') do
+  @segments.map { |s|
+    s['operatingCarrierInfo']['flightNumber'] +
+    (s['numberOfStops'] > 0 ? '<i class="fa fa-map-signs" style="color:#ff8c00"></i>' : '') +
+    (s['wifiAvailable'] ? '<i class="fa fa-wifi" style="color:#1e90ff"></i>' : '')
+  }.join(', ')
+end
 
 class App < Sinatra::Base
   def parse_search_params(params)
@@ -33,7 +39,7 @@ class App < Sinatra::Base
     erb :search_form
   end
 
-  post '/search' do
+  post '/' do
     parsed_params = parse_search_params(params)
 
     date = parsed_params[:date]
