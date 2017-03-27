@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/kevinreedy/flydays.git
+  revision: 4ef31db4c7958aa19da6db407328b8798d0e5502
+  ref: 4ef31db4c7958aa19da6db407328b8798d0e5502
+  specs:
+    flydays (0.1.0)
+      mechanize (~> 2.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -10,8 +18,6 @@ GEM
     concurrent-ruby (1.0.5)
     domain_name (0.5.20170223)
       unf (>= 0.0.5, < 1.0.0)
-    flydays (0.1.0)
-      mechanize (~> 2.7)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.1)
@@ -63,7 +69,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
-  flydays
+  flydays!
   pry
   shotgun
   sinatra
