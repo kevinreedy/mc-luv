@@ -11,8 +11,8 @@ class App < Sinatra::Base
   def parse_search_params(params)
     {
       date: Date.parse(params[:date]),
-      orig: params[:orig].split(/,\s*/),
-      dest: params[:dest].split(/,\s*/),
+      orig: params[:orig].split(/,\s*/).map(&:upcase),
+      dest: params[:dest].split(/,\s*/).map(&:upcase),
       route_type: params[:route_type]
     }
   end
