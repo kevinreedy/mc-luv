@@ -1,11 +1,11 @@
+require './lib/time_math'
 require 'sinatra'
 require 'flyday'
 
 # TODO: show Wifi
 # TODO: show # of segments on direct flights
 # TODO: css fomatting
-# TODO: add date and search info to results page
-# TODO: fix travel time w/ time zones
+# TODO: add search info to results page
 
 class App < Sinatra::Base
   def parse_search_params(params)
@@ -36,12 +36,13 @@ class App < Sinatra::Base
   post '/search' do
     parsed_params = parse_search_params(params)
 
+    date = parsed_params[:date]
     flights = []
 
     parsed_params[:orig].each do |orig_city|
       parsed_params[:dest].each do |dest_city|
         flights.concat(get_route_flights(
-          date: parsed_params[:date],
+          date: date,
           orig: orig_city,
           dest: dest_city,
           route_type: parsed_params[:route_type]
@@ -49,8 +50,8 @@ class App < Sinatra::Base
       end
     end
 
-    flights.sort_by! { |flight| Time.parse(flight.takeoff_at) }
+    flights.sort_by! { |flight| TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig) }
 
-    erb :search_results, locals: { flights: flights }
+    erb :search_results, locals: { flights: flights, date: date }
   end
 end
