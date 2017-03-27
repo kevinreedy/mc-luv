@@ -2,13 +2,14 @@ require './lib/time_math'
 require 'sinatra'
 require 'flyday'
 
-# TODO: show # of segments on direct flights
 # TODO: add search info to results page
 
-# Add new method to Flyday::Flight class for Wi-Fi on flight
-Flyday::Flight.send(:define_method, 'flight_number_with_wifi') do
+# Add new method to Flyday::Flight class for icons for Wi-Fi and stops
+Flyday::Flight.send(:define_method, 'flight_number_with_icons') do
   @segments.map { |s|
-    s['operatingCarrierInfo']['flightNumber'] + (s['wifiAvailable'] ? '<i class="fa fa-wifi" style="color:#1e90ff"></i>' : '')
+    s['operatingCarrierInfo']['flightNumber'] +
+    (s['numberOfStops'] > 0 ? '<i class="fa fa-map-signs" style="color:#ff8c00"></i>' : '') +
+    (s['wifiAvailable'] ? '<i class="fa fa-wifi" style="color:#1e90ff"></i>' : '')
   }.join(', ')
 end
 
