@@ -2,9 +2,15 @@ require './lib/time_math'
 require 'sinatra'
 require 'flyday'
 
-# TODO: show Wifi
 # TODO: show # of segments on direct flights
 # TODO: add search info to results page
+
+# Add new method to Flyday::Flight class for Wi-Fi on flight
+Flyday::Flight.send(:define_method, 'flight_number_with_wifi') do
+  @segments.map { |s|
+    s['operatingCarrierInfo']['flightNumber'] + (s['wifiAvailable'] ? '<i class="fa fa-wifi" style="color:#1e90ff"></i>' : '')
+  }.join(', ')
+end
 
 class App < Sinatra::Base
   def parse_search_params(params)

@@ -16,7 +16,7 @@
       <tr>
         <td><%= TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig).strftime('%I:%M %p %Z') %></td>
         <td><%= TimeMath.datetime_for_airport(date, flight.land_at, flight.dest).strftime('%I:%M %p %Z') %></td>
-        <td><%= flight.flight_number %></td>
+        <td><%= flight.flight_number_with_wifi %></td>
         <td><%= flight.segments_path %></td>
         <td><%= Time.at(TimeMath.datetime_for_airport(date, flight.land_at, flight.dest) - TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig)).utc.strftime('%H:%M') %></td>
         <td>$<%= flight.price_range.split(/-/).first.to_i %></td>
@@ -24,3 +24,5 @@
     <% end %>
   </tbody>
 </table>
+Guide:<br/>
+<i class="fa fa-wifi" style="color:#1e90ff"></i> Wi-Fi on Flight
