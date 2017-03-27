@@ -1,26 +1,26 @@
-    <h1>mc-luv search</h1>
-    <h2>Flights for <%= date %></h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Depart</th>
-          <th>Arrive</th>
-          <th>Flight #</th>
-          <th>Routing</th>
-          <th>Travel Time</th>
-          <th>Fare</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% flights.each do |flight| %>
-          <tr>
-            <td><%= TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig).strftime('%I:%M %p %Z') %></td>
-            <td><%= TimeMath.datetime_for_airport(date, flight.land_at, flight.dest).strftime('%I:%M %p %Z') %></td>
-            <td><%= flight.flight_number %></td>
-            <td><%= flight.segments_path %></td>
-            <td><%= Time.at(TimeMath.datetime_for_airport(date, flight.land_at, flight.dest) - TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig)).utc.strftime('%H:%M') %></td>
-            <td>$<%= flight.price_range.split(/-/).first.to_i %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<h1>mc-luv search</h1>
+<h2>Flights for <%= date %></h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Depart</th>
+      <th>Arrive</th>
+      <th>Flight #</th>
+      <th>Routing</th>
+      <th>Travel Time</th>
+      <th>Fare</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% flights.each do |flight| %>
+      <tr>
+        <td><%= TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig).strftime('%I:%M %p %Z') %></td>
+        <td><%= TimeMath.datetime_for_airport(date, flight.land_at, flight.dest).strftime('%I:%M %p %Z') %></td>
+        <td><%= flight.flight_number %></td>
+        <td><%= flight.segments_path %></td>
+        <td><%= Time.at(TimeMath.datetime_for_airport(date, flight.land_at, flight.dest) - TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig)).utc.strftime('%H:%M') %></td>
+        <td>$<%= flight.price_range.split(/-/).first.to_i %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
