@@ -7,6 +7,7 @@
   <body>
 
     <h1>mc-luv search</h1>
+    <h2>Flights for <%= date %></h2>
     <table border=1>
       <tr>
         <td>Depart</td>
@@ -18,11 +19,11 @@
       </tr>
       <% flights.each do |flight| %>
         <tr>
-          <td><%= Time.parse(flight.takeoff_at).strftime('%I:%M %p') %></td>
-          <td><%= Time.parse(flight.land_at).strftime('%I:%M %p') %></td>
+          <td><%= TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig).strftime('%I:%M %p %Z') %></td>
+          <td><%= TimeMath.datetime_for_airport(date, flight.land_at, flight.dest).strftime('%I:%M %p %Z') %></td>
           <td><%= flight.flight_number %></td>
           <td><%= flight.segments_path %></td>
-          <td><%= Time.at(Time.parse(flight.land_at) - Time.parse(flight.takeoff_at)).utc.strftime('%H:%M') %></td>
+          <td><%= Time.at(TimeMath.datetime_for_airport(date, flight.land_at, flight.dest) - TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig)).utc.strftime('%H:%M') %></td>
           <td>$<%= flight.price_range.split(/-/).first.to_i %></td>
         </tr>
       <% end %>
