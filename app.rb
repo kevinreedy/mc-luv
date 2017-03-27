@@ -4,7 +4,6 @@ require 'flyday'
 
 # TODO: show Wifi
 # TODO: show # of segments on direct flights
-# TODO: css fomatting
 # TODO: add search info to results page
 
 class App < Sinatra::Base
