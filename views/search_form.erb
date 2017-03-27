@@ -1,18 +1,17 @@
-<h1>mc-luv search</h1>
 <form method="POST">
 <p> Date:
-  <input type="date" name="date" value="<%= Date.today.iso8601 %>" />
+  <input type="date" name="date" value="<%= params[:date] || Date.today.iso8601 %>" />
 </p>
 <p> Origin Airports (comma separated):
-  <input type="text" name="orig" />
+  <input type="text" name="orig" value="<%= params[:orig] %>"/>
 </p>
 <p> Destination Airports (comma separated):
-  <input type="text" name="dest" />
+  <input type="text" name="dest" value="<%= params[:dest] %>" />
 </p>
 <p>
-  <input type="radio" name="route_type" value="all" checked /> All Flights<br/>
-  <input type="radio" name="route_type" value="direct" /> Direct (no plane change) + Nonstop<br/>
-  <input type="radio" name="route_type" value="nonstop" /> Nonstop<br/>
+  <input type="radio" name="route_type" value="all" <%= 'checked ' if params[:route_type] == 'all' or params[:route_type] == nil %>/> All Flights<br/>
+  <input type="radio" name="route_type" value="direct" <%= 'checked ' if params[:route_type] == 'direct' %>/> Direct (no plane change) + Nonstop<br/>
+  <input type="radio" name="route_type" value="nonstop" <%= 'checked ' if params[:route_type] == 'nonstop' %>/> Nonstop<br/>
 </p>
 <p>
   <input type="submit" value="Search" />

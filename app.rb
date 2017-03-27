@@ -2,8 +2,6 @@ require './lib/time_math'
 require 'sinatra'
 require 'flyday'
 
-# TODO: add search info to results page
-
 # Add new method to Flyday::Flight class for icons for Wi-Fi and stops
 Flyday::Flight.send(:define_method, 'flight_number_with_icons') do
   @segments.map { |s|
