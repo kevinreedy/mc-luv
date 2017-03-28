@@ -16,16 +16,17 @@
   <tbody>
     <% flights.each do |flight| %>
       <tr>
-        <td><%= TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig).strftime('%I:%M %p %Z') %></td>
-        <td><%= TimeMath.datetime_for_airport(date, flight.land_at, flight.dest).strftime('%I:%M %p %Z') %></td>
-        <td><%= flight.flight_number_with_icons %></td>
+        <td><%= flight.takeoff_at.strftime('%I:%M %p %Z') %></td>
+        <td><%= flight.land_at.strftime('%I:%M %p %Z') %></td>
+        <td><%= flight.segments.map(&:to_s).join(', ') %></td>
         <td><%= flight.segments_path %></td>
-        <td><%= Time.at(TimeMath.datetime_for_airport(date, flight.land_at, flight.dest) - TimeMath.datetime_for_airport(date, flight.takeoff_at, flight.orig)).utc.strftime('%H:%M') %></td>
+        <td><%= flight.travel_time.strftime('%H:%M') %></td>
         <td>$<%= flight.price_range.split(/-/).first.to_i %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 Guide:<br />
+<i class="fa fa-wifi text-success"></i> Wi-Fi on Flight<br />
 <i class="fa fa-wifi text-danger"></i> No Wi-Fi on Flight<br />
 <i class="fa fa-map-signs" style="color:#ff8c00"></i> Stops with no plane-change
