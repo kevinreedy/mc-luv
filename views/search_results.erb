@@ -1,5 +1,6 @@
 <%= erb :search_form %>
-
+<hr />
+<%= erb :search_days, locals: { flights: flights } %>
 <hr />
 
 <table class="table table-striped">
@@ -29,4 +30,17 @@
 Guide:<br />
 <i class="fa fa-wifi text-success"></i> Wi-Fi on Flight<br />
 <i class="fa fa-wifi text-danger"></i> No Wi-Fi on Flight<br />
-<i class="fa fa-map-signs" style="color:#ff8c00"></i> Stops with no plane-change
+<i class="fa fa-map-signs" style="color:#ff8c00"></i> Stops with no plane-change<br />
+<i class="fa fa-star"></i> Cheapest Flight<br />
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    get_nearby_prices(
+      "<%= params[:date] %>",
+      "<%= params[:orig] %>",
+      "<%= params[:dest] %>",
+      "<%= params[:route_type] %>",
+      2
+    );
+  });
+</script>

@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-1"></div>
+
+  <% (Date.parse(params[:date])-2..Date.parse(params[:date])+2).to_a.each do |date| %>
+    <div class="col-md-2">
+      <a href ="<%= request.path + '?' + URI.encode_www_form(params.merge('date' => date.iso8601)) %>"
+        id="price-<%= date.iso8601 %>"
+        class="btn btn-<%= date.iso8601 == params[:date] ? 'info' : 'primary' %>"
+        role="button"
+        style="width:100%">
+
+        <%= date.iso8601 %><br />
+        <% if date.iso8601 == params[:date] %>
+          $<%= flights.map{ |f| f.price_range.split(/-/).first.to_i }.min %>
+        <% else %>
+          <i class="fa fa-cog fa-spin fa-fw"></i>
+        <% end %>
+      </a>
+    </div>
+  <% end %>
+
+  <div class="col-md-1 mc-day"></div>
+</div>
