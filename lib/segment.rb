@@ -8,7 +8,7 @@ class Segment
 
   def to_s
     "#{flight_number} " +
-    (stop_no_plane_change ? ' <i class="fa fa-map-signs" style="color:#ff8c00"></i>' : '') +
-    (has_wifi ? ' <i class="fa fa-wifi text-success"></i>' : ' <i class="fa fa-wifi text-danger"></i>')
+    (has_wifi ? ' <i class="fa fa-wifi text-success"></i>' : ' <i class="fa fa-wifi text-danger"></i>') +
+    (stop_no_plane_change ? ' <i class="fa fa-map-signs" style="color:#ff8c00"></i>' : '')
   end
 end
