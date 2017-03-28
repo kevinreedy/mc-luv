@@ -6,8 +6,8 @@ require 'flyday'
 Flyday::Flight.send(:define_method, 'flight_number_with_icons') do
   @segments.map { |s|
     s['operatingCarrierInfo']['flightNumber'] +
-    (s['numberOfStops'] > 0 ? '<i class="fa fa-map-signs" style="color:#ff8c00"></i>' : '') +
-    (s['wifiAvailable'] ? '<i class="fa fa-wifi" style="color:#1e90ff"></i>' : '')
+    (s['numberOfStops'] > 0 ? ' <i class="fa fa-map-signs" style="color:#ff8c00"></i>' : '') +
+    (s['wifiAvailable'] ? '' : ' <i class="fa fa-wifi text-danger"></i>')
   }.join(', ')
 end
 
