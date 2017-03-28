@@ -17,7 +17,7 @@ class App < Sinatra::Base
     erb :search_form
   end
 
-  post '/' do
+  get '/search' do
     parsed_params = parse_search_params(params)
 
     date = parsed_params[:date]
