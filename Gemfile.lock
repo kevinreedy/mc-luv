@@ -14,10 +14,15 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    hashdiff (0.3.7)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.1)
@@ -45,9 +50,12 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    public_suffix (3.0.1)
     rack (1.6.5)
     rack-protection (1.5.3)
       rack
+    rake (12.3.0)
+    safe_yaml (1.0.4)
     shotgun (0.9.2)
       rack (>= 1.0)
     sinatra (1.4.8)
@@ -62,6 +70,11 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
+    vcr (4.0.0)
+    webmock (3.1.1)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     webrobots (0.1.2)
 
 PLATFORMS
@@ -71,11 +84,14 @@ DEPENDENCIES
   activesupport
   flydays!
   pry
+  rake
   shotgun
   sinatra
+  vcr
+  webmock
 
 RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
